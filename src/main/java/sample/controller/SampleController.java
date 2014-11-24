@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SampleController {
@@ -17,7 +19,7 @@ public class SampleController {
 	 * @return ビュー名
 	 */
     @RequestMapping("/hello")
-    String hello(Model model) {
+    public String hello(Model model) {
     	model.addAttribute("message", "hello world!");
     	return "hello";
     }
@@ -32,9 +34,24 @@ public class SampleController {
      * @return ビュー名
      */
     @RequestMapping("/hello/{name}")
-    String hello(@PathVariable String name, Model model) {
+    public String helloPathVariable(@PathVariable String name, Model model) {
     	model.addAttribute("message", String.format("Hello %s!", name));
         return "hello";
+    }
+    
+    /**
+     * クエリ文字列を使用したハンドラ・メソッドの例.
+     * {@link #helloPathVariable(String, Model)}と異なり、
+     * クエリ文字列で指定された値をメッセージの生成に使用する。
+     * 加えてこのハンドラでは{@link RequestMapping}でHTTPメソッドの制約を付けている。
+     * @param name クエリ文字列
+     * @param model モデル
+     * @return ビュー名
+     */
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String helloReqestParam(@RequestParam("name") String name, Model model) {
+    	model.addAttribute("message", String.format("Hello %s!", name));
+    	return "hello";
     }
 
 }
