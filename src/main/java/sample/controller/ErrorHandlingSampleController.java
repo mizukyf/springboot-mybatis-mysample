@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * エラー処理に関するハンドラ・メソッドのサンプロを実装したコントローラ.
+ * エラー処理に関するハンドラ・メソッドのサンプルを実装したコントローラ.
  * クラス・レベルで{@link RequestMapping}を使用することでベースとなるパスを指定している。
  * ここで指定されたパスは、個別のハンドラ・メソッドで指定しているパスの接頭辞として連結される。
  */
