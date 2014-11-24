@@ -35,6 +35,11 @@ public class MyBatisSampleController {
 	@Autowired
 	private ActorMapper actorMapper;
 	
+	@RequestMapping({"/", "/index"})
+	public String index() {
+		return "/mybatis/index";
+	}
+	
 	/**
 	 * パス変数で指定されたIDを使用してactorテーブルからレコードを取得して画面表示する.
 	 * 単一値を返すことを前提としたマッパーのメソッドは、該当する値が存在しなかったり、
@@ -45,13 +50,12 @@ public class MyBatisSampleController {
 	 * @return ビュー名
 	 */
     @RequestMapping("/actor/{id}")
-    String actor(@PathVariable int id, Model model) {
+    public String actor(@PathVariable int id, Model model) {
     	final ActorEntity a = actorMapper.selectById(id);
     	model.addAttribute("found", a != null);
     	if (a != null) {
         	model.addAttribute("actor", a);
     	}
-    	
         return "/mybatis/actor";
     }
 	
@@ -61,7 +65,7 @@ public class MyBatisSampleController {
      * @return ビュー名
      */
     @RequestMapping("/actors")
-    String actor(Model model) {
+    public String actor(Model model) {
     	final List<ActorEntity> as = actorMapper.selectAll();
    		model.addAttribute("actors", as);
         return "/mybatis/actors";
