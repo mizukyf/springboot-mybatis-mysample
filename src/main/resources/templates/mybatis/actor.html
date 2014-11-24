@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Actor</title>
+</head>
+<body>
+	<h1>Actor</h1>
+	<table th:if="${found}">
+		<thead>
+			<tr><th>attribute</th><th>value</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>actor_id</td><td th:text="${actor.actorId}">id</td></tr>
+			<tr><td>first_name</td><td th:text="${actor.firstName}">first_name</td></tr>
+			<tr><td>last_name</td><td th:text="${actor.lastName}">last_name</td></tr>
+			<tr><td>last_update</td><td th:text="${actor.lastUpdate}">last_update</td></tr>
+		</tbody>
+	</table>
+	<p th:unless="${found}">not found</p>
+</body>
+</html>

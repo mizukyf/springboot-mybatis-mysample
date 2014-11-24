@@ -4,10 +4,14 @@
 	xmlns:th="http://www.thymeleaf.org" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hello</title>
+<title>Error was handled by Default Controller</title>
 </head>
 <body>
-	<h1>Hello</h1>
-	<p th:text="${message}">Hello World!</p>
+	<h1>Error was handled by Default Controller</h1>
+	<p>
+		There was an unexpected error (type=<span th:text="${error}">error</span>,
+		status=<span th:text="${status}">status</span>).
+	</p>
+	<p th:text="${message}">message</p>
 </body>
 </html>

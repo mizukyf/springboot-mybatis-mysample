@@ -4,10 +4,20 @@
 	xmlns:th="http://www.thymeleaf.org" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hello</title>
+<title>Actors</title>
 </head>
 <body>
-	<h1>Hello</h1>
-	<p th:text="${message}">Hello World!</p>
+	<h1>Actors</h1>
+	<table>
+		<thead>
+			<tr><th>id</th><th>name</th></tr>
+		</thead>
+		<tbody>
+			<tr th:each="a : ${actors}" >
+				<td th:text="${a.actorId}">actor's id</td>
+				<td><a href="actor/0" th:href="${'actor/' + a.actorId}" th:text="${a.firstName + ' ' + a.lastName}">actor's name</a></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

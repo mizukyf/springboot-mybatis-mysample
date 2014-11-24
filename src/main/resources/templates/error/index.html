@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Error Handling Sample</title>
+</head>
+<body>
+	<h1>Error Handling Sample</h1>
+	<dl>
+		<dt><a href="handled-by-controller-themself">Handle by Controller themself</a></dt>
+		<dd>コントローラ・クラスそのものに実装された例外ハンドラを使用する例.</dd>
+		<dt><a href="handled-by-controller-advice">Handle by Controller advice</a></dt>
+		<dd>別クラスで実装された例外ハンドラ（AOPにより関連付けられる）を使用する例. 
+		例外ハンドラはSampleExceptionHandlerAdviceで実装されている。</dd>
+		<dt><a href="handled-by-resolver">Handle by Resolver</a></dt>
+		<dd>例外リゾルバの実装を使用する例. ハンドラ・メソッド内で発生した例外は、 
+		コントローラ独自の例外ハンドラやAOPで関連付けられた例外ハンドラにキャッチされなかった場合、 
+		ハンドラ例外リゾルバ（HandlerExceptionResolverの実装）に処理を委ねられる。</dd>
+		<dt><a href="handled-by-default-controller">Handle by Default Controller</a></dt>
+		<dd>Spring Bootデフォルトの例外コントローラを使用する例.
+		前述の3つはいずれもハンドラ内で発生した例外を処理するもの。
+		そもそもマッピングに失敗した場合などに発生す例外はこの例外ハンドラ・レベルで処理することになる
+		（ExceptionHanderインターフェースの実装によりカスタマイズが可能）。</dd>
+	</dl>
+</body>
+</html>

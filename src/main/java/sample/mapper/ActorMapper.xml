@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sample.mapper.ActorMapper">
+	<select id="selectById" resultType="ActorEntity">
+		select
+			actor_id actorId,
+			first_name firstName,
+			last_name lastName,
+			last_update lastUpdate
+		from
+			actor
+		where
+			actor_id = #{id}
+	</select>
+	<select id="selectAll" resultType="ActorEntity">
+		select
+			actor_id actorId,
+			first_name firstName,
+			last_name lastName,
+			last_update lastUpdate
+		from
+			actor
+	</select>
+</mapper>
