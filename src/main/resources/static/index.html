@@ -9,12 +9,16 @@
 	<h1>Sample</h1>
 	<dl>
 		<dt><a href="hello">Hello World</a></dt>
-		<dd>"hello world"を表示するだけのサンプル.</dd>
+		<dd>"hello world!"を表示するだけのサンプル.</dd>
 		<dt><a href="hello/spring-boot">Hello Path Valiable</a></dt>
-		<dd>"hello spring-boot"を表示するだけのサンプル. 
+		<dd>"hello spring-boot!"を表示するだけのサンプル. 
+		"spring-boot"の部分はパス変数により設定されており、その内容に応じて変化させられる。</dd>
 		<dt><a href="hello?name=spring-boot">Hello Query String</a></dt>
-		<dd>"hello spring-boot"を表示するだけのサンプル. 
-		この"spring-boot"の部分はクエリ文字列により設定されており、その内容に応じて変化させられる。</dd>
+		<dd>"hello spring-boot!"を表示するだけのサンプル. 
+		"spring-boot"の部分はクエリ文字列により設定されており、その内容に応じて変化させられる。</dd>
+		<dt><a href="hello/spring-boot!">Hello With Service Class</a></dt>
+		<dd>"hello SPRING-BOOT!"を表示するだけのサンプル. 
+		"SPRING-BOOT"の部分はパス変数で設定された内容をサービス・クラスで処理してから表示している。</dd>
 		<dt><a href="error/">Error Handling Sample</a></dt>
 		<dd>エラー処理に関するハンドラ・メソッドの各種サンプル.
 		コントローラ内の例外ハンドラ、コントローラ外の（AOPで関連付けられる）例外ハンドラ、

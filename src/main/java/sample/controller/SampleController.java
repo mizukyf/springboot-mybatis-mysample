@@ -1,14 +1,21 @@
 package sample.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import sample.service.SampleService;
+
 @Controller
 public class SampleController {
+	
+	@Autowired
+	private SampleService sampleService;
 	
 	/**
 	 * 最も単純なハンドラ・メソッドの例.
@@ -53,5 +60,21 @@ public class SampleController {
     	model.addAttribute("message", String.format("Hello %s!", name));
     	return "hello";
     }
-
+    
+    /**
+     * サービス・クラスを使用したハンドラ・メソッドの例.
+     * {@link Service}を付与して定義したサービス・クラスに
+     * {@link Autowired}を付与したフィールドを通じてアクセスしている。
+     * フィールドに対するオブジェクト参照の設定はSpringにより自動的に実施される。
+     * サンプルのサービス・クラスのメソッドは引数として受け取った文字列を大文字化して返すだけ。
+     * @param name パス変数
+     * @param model モデル
+     * @return ビュー名
+     */
+    @RequestMapping("/hello/{name}!")
+    public String helloWithServiceClass(@PathVariable String name, Model model) {
+    	model.addAttribute("message", String.format("Hello %s!",
+    			sampleService.doSomeBusinessLogic(name)));
+    	return "hello";
+    }
 }
