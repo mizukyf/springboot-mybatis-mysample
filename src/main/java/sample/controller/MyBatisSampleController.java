@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import sample.entity.ActorEntity;
-import sample.mapper.ActorMapper;
+import sample.service.MyBatisSampleService;
 
 /**
  * MyBatisによるO/Rマッピングを使用するコントローラ.
@@ -26,14 +29,8 @@ import sample.mapper.ActorMapper;
 @RequestMapping("/mybatis")
 public class MyBatisSampleController {
 
-	/**
-	 * actorテーブルにアクセスするDMLを仲介するマッパー.
-	 * Mybatis-Springによりマッパー・インターフェースが自動で探知され、
-	 * アノテーションとマッパーXMLで指定されたクエリを実行するマッパー実装が自動生成される。
-	 * 自動生成されたマッパー実装はSpringのもとで管理され{@link Autowired}指定されたフィールドに自動設定される。
-	 */
 	@Autowired
-	private ActorMapper actorMapper;
+	private MyBatisSampleService sampleService;
 	
 	@RequestMapping({"/", "/index"})
 	public String index() {
@@ -51,7 +48,7 @@ public class MyBatisSampleController {
 	 */
     @RequestMapping("/actor/{id}")
     public String actor(@PathVariable int id, Model model) {
-    	final ActorEntity a = actorMapper.selectById(id);
+    	final ActorEntity a = sampleService.getActorById(id);
     	model.addAttribute("found", a != null);
     	if (a != null) {
         	model.addAttribute("actor", a);
@@ -65,10 +62,58 @@ public class MyBatisSampleController {
      * @return ビュー名
      */
     @RequestMapping("/actors")
-    public String actor(Model model) {
-    	final List<ActorEntity> as = actorMapper.selectAll();
+    public String actors(Model model) {
+    	final List<ActorEntity> as = sampleService.getActorsList();
    		model.addAttribute("actors", as);
         return "/mybatis/actors";
-    }    
+    }
+    
+    @RequestMapping("/input")
+    public String input(Model model) {
+    	final ActorEntity actor = new ActorEntity();
+    	actor.setFirstName("Foo");
+    	actor.setLastName("Bar");
+    	model.addAttribute("actor", actor);
+    	return "/mybatis/input";
+    }
+    
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(
+    		// @ModelAttributeによりフォーム情報でコマンド・オブジェクトが初期化される
+    		@ModelAttribute("actor") ActorEntity actor,
+    		// 初期化処理中に発生したエラーはすぐ次のBindingResultに格納される
+    		BindingResult result,
+    		Model model) {
+    	// フィールドに設定されている値をチェック
+    	if (actor.getFirstName() == null || actor.getFirstName().isEmpty() 
+    			|| actor.getLastName() == null || actor.getLastName().isEmpty()) {
+    		// ここでは問題があれば例外をスローしているが入力画面に戻り、
+    		// バリデーション・エラーのメッセージを表示する実装のほうが親切
+    		throw new IllegalArgumentException("First name and last name must be not null (and not empty).");
+    	}
+    	// フォームの情報からコマンド・オブジェクトを初期化した際のエラー有無をチェック
+    	if (result.hasErrors()) {
+    		// ここでは問題があれば例外をスローしているが入力画面に戻り、
+    		// バリデーション・エラーのメッセージを表示する実装のほうが親切
+    		throw new IllegalArgumentException();
+    	}
+    	// サービスを通じてデータを登録
+    	sampleService.registerActor(actor);
+    	// 処理が無事終わったら一覧ページにリダイレクト
+    	return "redirect:/mybatis/actors";
+    }
+    
+    @RequestMapping(value = "/register-and-cancel", method = RequestMethod.POST)
+    public String registerAndCancel(
+    		@ModelAttribute("actor") ActorEntity actor,
+    		BindingResult result,
+    		Model model) {
+    	try {
+    		sampleService.registerActorAndCancel(actor);
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    	}
+    	return "redirect:/mybatis/actors";
+    }
 	
 }

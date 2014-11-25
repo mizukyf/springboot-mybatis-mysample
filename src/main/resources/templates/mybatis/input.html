@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Actor</title>
+</head>
+<body>
+	<h1>Actor</h1>
+	<h2>Register (Insert)</h2>
+	<form action="register" method="post" th:object="${actor}">
+		<table>
+			<thead>
+				<tr><th>attribute</th><th>value</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>first_name</td><td><input type="text" th:field="*{firstName}" /></td></tr>
+				<tr><td>last_name</td><td><input type="text"  th:field="*{lastName}" /></td></tr>
+			</tbody>
+		</table>
+		<button type="submit">submit</button>
+	</form>
+	<h2>Register and Cancel (Insert and rollback)</h2>
+	<form action="register-and-cancel" method="post" th:object="${actor}">
+		<table>
+			<thead>
+				<tr><th>attribute</th><th>value</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>first_name</td><td><input type="text" th:field="*{firstName}" /></td></tr>
+				<tr><td>last_name</td><td><input type="text"  th:field="*{lastName}" /></td></tr>
+			</tbody>
+		</table>
+		<button type="submit">submit</button>
+	</form>
+</body>
+</html>

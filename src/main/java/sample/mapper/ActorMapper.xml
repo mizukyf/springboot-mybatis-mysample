@@ -21,4 +21,14 @@
 		from
 			actor
 	</select>
+	<select id="selectCount" resultType="int">
+		select
+			count(1)
+		from
+			actor
+	</select>
+	<insert id="insert" useGeneratedKeys="true">
+		insert into actor (first_name, last_name)
+		values (#{firstName}, #{lastName})
+	</insert>
 </mapper>
