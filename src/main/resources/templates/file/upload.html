@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>File Upload</title>
+</head>
+<body>
+	<h1>File Upload</h1>
+
+	<h2>Form</h2>
+	<!-- ファイルアップロードを行う場合はFORM要素のenctype="multipart/form-data"属性指定が必須になる -->
+	<form action="#" method="post" enctype="multipart/form-data">
+		<label for="file">utf-8 encoded file</label>
+		<input type="file" if="file" name="file" />
+		<button type="submit">submit</button>
+	</form>
+
+	<h2>Result</h2>
+	<table th:if="${uploaded}">
+		<tbody>
+			<tr>
+				<th>file name</th>
+				<td th:text="${fileName}">--</td>
+			</tr>
+			<tr>
+				<th>first line</th>
+				<td th:text="${firstLine}">--</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
