@@ -6,6 +6,15 @@
 <title>Sample</title>
 </head>
 <body>
+	<!--
+	Spring Web MVCのリファレンス（"Spring Framework Reference Documentation"の第5部"The Web"の第17章"Web MVC framework"）によれば
+	Webサイトを構成する静的リソースとして認識されるパスはいくつかあるが`(classpath)/static`がその代表格である。
+	コントローラのハンドラ・メソッドとリクエストURLのマッピングは厳密で、
+	
+	`.../index`というマッピングを持つハンドラは`.../`というURLにはマッチしないし、その逆もまた然りである。
+	この挙動は実際のところ適切なものであると思う。
+	これに対して静的リソースでは、`.../index.html`というリソースには`.../`というURLでもアクセスできる。
+	-->
 	<h1>Sample</h1>
 	<dl>
 		<dt><a href="hello">Hello World</a></dt>
