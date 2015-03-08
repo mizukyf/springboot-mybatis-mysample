@@ -64,4 +64,9 @@ public class SampleController {
     			sampleService.doSomeBusinessLogic(name)));
     	return "hello";
     }
+    
+    @RequestMapping("/restapi-tester")
+    public String restapiTester(Model model) {
+    	return "restapi-tester";
+    }
 }
